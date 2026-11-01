@@ -1,0 +1,20 @@
+# Gura (גורה)
+
+> A home for movement, martial arts, and improvisation, taught by Guy Gurevich. Gura dojo in Montefiore, Tel Aviv. בית לתנועה, לחימה ואילתור בהדרכת גיא גורביץ׳. דוג׳ו גורה בשכונת מונטיפיורי, תל אביב.
+
+Gura is a dojo in Tel Aviv. The site has two pages, one in Hebrew and one in English, with the same content.
+
+## Pages
+- [Hebrew page](https://guradojo.com/): the full site in Hebrew
+- [English page](https://guradojo.com/en/): the full site in English
+- [Full text for AI assistants](https://guradojo.com/llms-full.txt): the copy of both pages as plain text
+
+## Facts
+- Teacher: Guy Gurevich (גיא גורביץ׳), a former Olympic judoka.
+- Place: Montefiore neighborhood, Tel Aviv. Our dojo is in the heart of Tel Aviv, in the Montefiore neighborhood.
+- The class: a gradual process in five stages, from listening inward, through movement and physical work, to meeting another person; it closes with returning to observation.
+- Safety: "A safe and supportive frame". The work is adapted to each person's abilities, experience, and physical condition.
+- Contact: WhatsApp +972523112310, email gurevichguy@gmail.com, Instagram https://www.instagram.com/guygurevitch_90
+
+## Not published on the site
+- Schedule, price, and street address are not on the page. Ask Guy on WhatsApp.

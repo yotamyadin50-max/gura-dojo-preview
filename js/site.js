@@ -10,6 +10,7 @@
     started = true;
     root.classList.add('js');
     window.setTimeout(warmPhotos, 150);
+    stagePosters();
     stageVideos();
     var header = doc.querySelector('.site-header');
     var chips = Array.prototype.slice.call(doc.querySelectorAll('.chip'));
@@ -55,7 +56,7 @@
     }
 
     /* section in view: chip aria-current and section-aware language toggle */
-    var ids = ['hero', 'class', 'about', 'guy', 'dojo', 'contact'];
+    var ids = ['hero', 'movement', 'about', 'class', 'guy', 'dojo', 'contact'];
     var current = '';
     function setCurrent(id) {
       current = id;
@@ -127,6 +128,17 @@
 
   /* Stage clips: run by themselves, muted and looping, no controls. The mp4 is attached only near the viewport and only when
      motion and data are welcome; paused when far away to spare battery. Any failure leaves the poster as an ordinary photo. */
+  /* posters are not loaded with the page: each is set from data-poster when its clip slot is within 800px of the viewport (all at once without IntersectionObserver); no-JS visitors see the <noscript> image instead */
+  function stagePosters() {
+    var vids = Array.prototype.slice.call(doc.querySelectorAll('video[data-poster]'));
+    function set(v) { if (!v.getAttribute('poster')) v.setAttribute('poster', v.getAttribute('data-poster')); }
+    if (!('IntersectionObserver' in window)) { vids.forEach(set); return; }
+    var po = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { set(e.target); po.unobserve(e.target); } });
+    }, { rootMargin: '800px 0px' });
+    vids.forEach(function (v) { po.observe(v); });
+  }
+
   function stageVideos() {
     var vids = Array.prototype.slice.call(doc.querySelectorAll('video[data-src]'));
     if (!vids.length) return;

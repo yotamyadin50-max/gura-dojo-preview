@@ -14,8 +14,7 @@
   --beni: #BE2F35; --beni-hi: #C3343A; --beni-lo: #B42B31;
   --focus: #E2C48E; --focus-paper: #2A231B;
   --ok: #7DBA8A; --err: #F08A6E; --off: #7D7466;
-  --grade: grayscale(1) brightness(0.8) sepia(0.5) hue-rotate(-8deg) contrast(1.05);
-  --grade-paper: grayscale(1) brightness(1.5) sepia(0.5) hue-rotate(-8deg) contrast(1.08);
+  --lift-paper: brightness(1.7) contrast(1.08);
   --serif: "Noto Serif Hebrew", "Noto Serif", "David", Georgia, serif;
   --sans: "Assistant", "Arial Hebrew", "Segoe UI", Arial, sans-serif;
   --ease-in-view: cubic-bezier(0, 0, 0, 1);
@@ -144,17 +143,17 @@ main { padding-block-start: var(--nav-h); }
   .hero__media { grid-column: 7 / span 6; grid-row: 1 / span 2; margin: 0; max-inline-size: none; }
 }
 
-/* photos and clips fused into the ground: one grade, a feathered edge, no frame (filter and mask live on the media element itself) */
-.fuse { --ft: 4%; --fr: 4%; --fb: 4%; --fl: 4%; filter: var(--grade);
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--fl), #000 calc(100% - var(--fr)), transparent), linear-gradient(to bottom, transparent, #000 var(--ft), #000 calc(100% - var(--fb)), transparent);
-  -webkit-mask-composite: source-in;
-  mask-image: linear-gradient(to right, transparent, #000 var(--fl), #000 calc(100% - var(--fr)), transparent), linear-gradient(to bottom, transparent, #000 var(--ft), #000 calc(100% - var(--fb)), transparent);
-  mask-composite: intersect; }
+/* photos and clips in natural colour, fused into the ground by an eased feathered edge, no frame (mask and blend live on the media element itself) */
+.fuse { --ft: 4%; --fr: 4%; --fb: 4%; --fl: 4%;
+  --mx: linear-gradient(to right, transparent, rgb(0 0 0 / 0.35) calc(var(--fl) * 0.5), #000 var(--fl), #000 calc(100% - var(--fr)), rgb(0 0 0 / 0.35) calc(100% - var(--fr) * 0.5), transparent);
+  --my: linear-gradient(to bottom, transparent, rgb(0 0 0 / 0.35) calc(var(--ft) * 0.5), #000 var(--ft), #000 calc(100% - var(--fb)), rgb(0 0 0 / 0.35) calc(100% - var(--fb) * 0.5), transparent);
+  -webkit-mask-image: var(--mx), var(--my); -webkit-mask-composite: source-in;
+  mask-image: var(--mx), var(--my); mask-composite: intersect; }
 .f-open { --ft: 10%; --fr: 3%; --fb: 3%; --fl: 3%; }
-.f-wall { --ft: 4%; --fr: 10%; --fb: 8%; --fl: 10%; filter: var(--grade-paper); mix-blend-mode: multiply; }
+.f-wall { --ft: 4%; --fr: 10%; --fb: 8%; --fl: 10%; filter: var(--lift-paper); mix-blend-mode: multiply; }
 .f-circle { --ft: 8%; --fr: 4%; --fb: 12%; --fl: 4%; }
-.f-clip { --ft: 4%; --fr: 4%; --fb: 4%; --fl: 4%; }
-.f-clip-wide { --ft: 5%; --fr: 4%; --fb: 5%; --fl: 4%; }
+.f-clip { --ft: 6%; --fr: 6%; --fb: 6%; --fl: 6%; }
+.f-clip-wide { --ft: 6%; --fr: 5%; --fb: 6%; --fl: 5%; }
 .f-judo { --ft: 6%; --fr: 6%; --fb: 6%; --fl: 6%; }
 .f-portrait { --ft: 2%; --fr: 3%; --fb: 6%; --fl: 8%; }
 .f-dojo { --ft: 8%; --fr: 4%; --fb: 14%; --fl: 4%; }

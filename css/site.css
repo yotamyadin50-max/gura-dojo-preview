@@ -175,6 +175,8 @@ main { padding-block-start: var(--nav-h); }
 
 /* class and the ring */
 .class__lead { margin-block-start: 16px; }
+.class__circle { margin-block-start: 32px; }
+.class__circle.media--still { inline-size: min(100%, 44rem); }
 .class { background: var(--sumi); }
 .stages { margin-block-start: 48px; display: grid; gap: 64px; }
 .stage { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 16px; row-gap: 12px; align-items: center; }

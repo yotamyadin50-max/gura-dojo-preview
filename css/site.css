@@ -122,6 +122,10 @@ main { padding-block-start: var(--nav-h); }
 /* hero */
 .hero { background: var(--sumi); padding-block: 24px 40px; }
 .hero__grid { display: block; }
+.hero__brand { font-family: var(--serif); font-weight: 600; font-size: clamp(3.25rem, 1.6rem + 7.5vw, 9rem); line-height: 0.9; letter-spacing: 0.01em; color: var(--washi); background: linear-gradient(180deg, var(--washi) 30%, var(--ochre) 120%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; padding-block-end: 0.12em; }
+.hero__brand::after { content: ""; display: block; inline-size: 72px; block-size: 2px; margin-block-start: 8px; background: var(--ochre); }
+.hero__brand + .kicker { margin-block-start: 10px; }
+.hero { background: radial-gradient(ellipse 80% 60% at 20% 0%, var(--kuri-2) 0%, var(--sumi) 70%); }
 .kicker + h1 { margin-block-start: 12px; }
 .hero__byline { margin-block-start: 16px; font-weight: 500; font-size: 17px; line-height: 1.6; }
 .hero__guy { margin-block-start: 4px; font-weight: 500; font-size: 15px; line-height: 1.5; color: var(--ash); }

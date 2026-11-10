@@ -116,6 +116,8 @@
           fab.classList.toggle('is-hidden', any);
           if (pill) pill.classList.toggle('is-hidden', any);
         }, { threshold: 0 });
+        var ftr = doc.querySelector('.footer'); /* the fab also hides while the footer is on screen (set here, not in the markup, so the CTA counts stay) */
+        if (ftr) ftr.setAttribute('data-cta', 'footer');
         Array.prototype.forEach.call(doc.querySelectorAll('[data-cta]'), function (el) { ctaObs.observe(el); });
       }
 

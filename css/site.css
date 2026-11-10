@@ -219,8 +219,8 @@ main { padding-block-start: var(--nav-h); }
 @media (min-width: 1024px) { .class__cta { display: flex; justify-content: center; } .class__cta .cta { display: inline-flex; } }
 
 /* about (paper, continues the wall) */
-.about { padding-block-start: calc(var(--sec) / 2); }
-.about__grid { padding-block-start: calc(var(--sec) / 2); background: linear-gradient(var(--washi-rule), var(--washi-rule)) center top / calc(100% - 2 * var(--side)) 1px no-repeat; }
+.about { padding-block-start: var(--sec); }
+.about__grid { padding-block-start:  0; }
 .about h2 { color: var(--washi-ink); }
 .about .beats { margin-block-start: 32px; display: grid; gap: 48px; }
 .beat p + p { margin-block-start: 12px; }

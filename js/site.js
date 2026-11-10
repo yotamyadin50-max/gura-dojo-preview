@@ -56,7 +56,7 @@
     }
 
     /* section in view: chip aria-current and section-aware language toggle */
-    var ids = ['hero', 'movement', 'about', 'class', 'guy', 'dojo', 'contact'];
+    var ids = ['hero', 'movement', 'class', 'about', 'guy', 'dojo', 'contact'];
     var current = '';
     function setCurrent(id) {
       current = id;

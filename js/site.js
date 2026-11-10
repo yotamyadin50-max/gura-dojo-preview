@@ -108,6 +108,8 @@
       if (fab) {
         var onScreen = {};
         var pill = doc.querySelector('.site-header .cta--pill');
+        /* the hero button is on screen at load: start hidden without a fade, so the button is never caught half-faded over the paper band below the hero */
+        fab.style.transition = 'none'; fab.classList.add('is-hidden'); void fab.offsetWidth; fab.style.transition = '';
         var ctaObs = new IntersectionObserver(function (entries) {
           entries.forEach(function (e) { onScreen[e.target.getAttribute('data-cta')] = e.isIntersecting; });
           var any = Object.keys(onScreen).some(function (k) { return onScreen[k]; });

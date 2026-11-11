@@ -390,4 +390,9 @@ html:not(.js) .media video { display: none; }
 .movement::after, .about::after, .contact::after { inset-inline-end: -6%; }
 .class::after, .guy::after { inset-inline-start: -6%; --mark: var(--washi); --mark-o: 0.045; }
 .about::after { inset-inline-end: auto; inset-inline-start: -6%; }
-@media (max-width: 767px) { .movement::after, .class::after, .about::after, .guy::after, .contact::after { block-size: min(60%, 420px); } }
+@media (max-width: 767px) {
+  .movement::after, .class::after, .about::after, .guy::after, .contact::after { block-size: min(78%, 640px); --mark-o: 0.13; }
+  .class::after, .guy::after { --mark-o: 0.1; }
+  .movement::after, .contact::after { inset-inline-end: -14%; }
+  .class::after, .guy::after, .about::after { inset-inline-start: -14%; }
+}

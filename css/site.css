@@ -396,3 +396,7 @@ html:not(.js) .media video { display: none; }
   .movement::after, .contact::after { inset-inline-end: -14%; }
   .class::after, .guy::after, .about::after { inset-inline-start: -14%; }
 }
+
+/* stage 01: the seated photo sits whole under its title and text (user request) */
+.stage .media--pano { grid-column: 1 / -1; inline-size: 100%; margin-block-start: 16px; }
+@media (min-width: 1024px) { .stage .media--pano { grid-column: 2 / -1; grid-row: 3; inline-size: min(100%, 56rem); margin-block-start: 8px; } .stage:has(.media--pano) { grid-template-rows: auto auto auto; } .stage:has(.media--pano) .stage__text { grid-column: 2 / -1; max-inline-size: 40rem; } }

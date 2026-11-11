@@ -16,22 +16,6 @@
     var chips = Array.prototype.slice.call(doc.querySelectorAll('.chip'));
     var toggles = Array.prototype.slice.call(doc.querySelectorAll('[data-toggle]'));
     var fab = doc.querySelector('.fab');
-    /* phone menu: the button opens the chip list under the header; closes on a chip tap, on Escape (focus returns to the button) and on a tap outside */
-    (function () {
-      var btn = doc.querySelector('.menu-btn');
-      if (!btn || !header) return;
-      function setOpen(on, back) {
-        if (on) header.setAttribute('data-open', ''); else header.removeAttribute('data-open');
-        btn.setAttribute('aria-expanded', on ? 'true' : 'false');
-        if (on) { var first = header.querySelector('.chip'); if (first) first.focus(); } /* keyboard users land in the list (it sits before the button in the tab order) */
-        if (!on && back) btn.focus();
-      }
-      btn.addEventListener('click', function () { setOpen(!header.hasAttribute('data-open')); });
-      Array.prototype.forEach.call(header.querySelectorAll('.chip'), function (c) { c.addEventListener('click', function () { setOpen(false); }); });
-      doc.addEventListener('keydown', function (e) { if ((e.key === 'Escape' || e.key === 'Esc') && header.hasAttribute('data-open')) { e.preventDefault(); setOpen(false, true); } });
-      doc.addEventListener('click', function (e) { if (header.hasAttribute('data-open') && !header.contains(e.target)) setOpen(false); });
-      window.addEventListener('resize', function () { if (header.hasAttribute('data-open') && window.innerWidth >= 768) setOpen(false); });
-    })();
     /* nav edge fade only while the chip row really overflows and is not scrolled to its end */
     (function () {
       var nav = doc.querySelector('.hdr-nav'), row = nav && nav.querySelector('.chips');
@@ -81,11 +65,9 @@
         if (on) c.setAttribute('aria-current', 'true'); else c.removeAttribute('aria-current');
         if (on) {
           var sc = c.closest('.chips');
-          if (sc.scrollWidth > sc.clientWidth) { /* only a row that really scrolls needs the active chip brought into view */
-            var a = c.getBoundingClientRect(), b = sc.getBoundingClientRect();
-            if (a.right > b.right) sc.scrollLeft += a.right - b.right + 8;
-            else if (a.left < b.left) sc.scrollLeft -= b.left - a.left + 8;
-          }
+          var a = c.getBoundingClientRect(), b = sc.getBoundingClientRect();
+          if (a.right > b.right) sc.scrollLeft += a.right - b.right + 8;
+          else if (a.left < b.left) sc.scrollLeft -= b.left - a.left + 8;
         }
       });
       toggles.forEach(function (t) {
@@ -94,6 +76,7 @@
         t.setAttribute('href', base + (id && id !== 'hero' ? '#' + id : ''));
       });
     }
+    if (!('IntersectionObserver' in window)) root.removeAttribute('data-top');
     if ('IntersectionObserver' in window) {
       var seen = {};
       var secObs = new IntersectionObserver(function (entries) {
@@ -108,16 +91,13 @@
       if (fab) {
         var onScreen = {};
         var pill = doc.querySelector('.site-header .cta--pill');
-        /* the hero button is on screen at load: start hidden without a fade, so the button is never caught half-faded over the paper band below the hero */
-        fab.style.transition = 'none'; fab.classList.add('is-hidden'); void fab.offsetWidth; fab.style.transition = '';
         var ctaObs = new IntersectionObserver(function (entries) {
           entries.forEach(function (e) { onScreen[e.target.getAttribute('data-cta')] = e.isIntersecting; });
           var any = Object.keys(onScreen).some(function (k) { return onScreen[k]; });
           fab.classList.toggle('is-hidden', any);
           if (pill) pill.classList.toggle('is-hidden', any);
+          root.removeAttribute('data-top');
         }, { threshold: 0 });
-        var ftr = doc.querySelector('.footer'); /* the fab also hides while the footer is on screen (set here, not in the markup, so the CTA counts stay) */
-        if (ftr) ftr.setAttribute('data-cta', 'footer');
         Array.prototype.forEach.call(doc.querySelectorAll('[data-cta]'), function (el) { ctaObs.observe(el); });
       }
 

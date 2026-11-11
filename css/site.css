@@ -400,3 +400,15 @@ html:not(.js) .media video { display: none; }
 /* stage 01: the seated photo sits whole under its title and text (user request) */
 .stage .media--pano { grid-column: 1 / -1; inline-size: 100%; margin-block-start: 16px; }
 @media (min-width: 1024px) { .stage .media--pano { grid-column: 2 / -1; grid-row: 3; inline-size: min(100%, 56rem); margin-block-start: 8px; } .stage:has(.media--pano) { grid-template-rows: auto auto auto; } .stage:has(.media--pano) .stage__text { grid-column: 2 / -1; max-inline-size: 40rem; } }
+
+/* phone: tighter rhythm (user: the gaps were too large on a phone); the 45-shade transition stays, shorter */
+@media (max-width: 767px) {
+  :root { --blend: 240px; }
+  .movement, .class, .about, .guy, .dojo, .contact, .footer { padding-block-start: calc(var(--blend) * 0.7); }
+  .movement, .class, .about, .guy, .dojo, .contact { padding-block-end: 36px; }
+  .stages { gap: 44px; margin-block-start: 32px; }
+  .about .beats { gap: 32px; margin-block-start: 24px; }
+  .movement__photo { margin-block-start: 24px; }
+  .gbeat { padding-block-end: 24px; }
+  .footer { padding-block-end: 40px; }
+}

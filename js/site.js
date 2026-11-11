@@ -177,4 +177,10 @@
 
   if (doc.readyState === 'complete') start();
   else window.addEventListener('load', start);
+  // phone header: the small emblem hides while the hero (with the big emblem) is on screen
+  (function () {
+    var hero = document.getElementById('hero');
+    if (!hero || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function (es) { document.documentElement.toggleAttribute('data-hero', es[0].isIntersecting); }, { threshold: 0.35 }).observe(hero);
+  })();
 })();

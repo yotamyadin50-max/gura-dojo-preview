@@ -412,3 +412,42 @@ html:not(.js) .media video { display: none; }
   .gbeat { padding-block-end: 24px; }
   .footer { padding-block-end: 40px; }
 }
+
+/* v8: the ten review notes (Web Designer + Marketing Manager), approved by the user */
+/* 1. less dead space: content arrives while the last third of the transition settles (desktop; phone already tightened) */
+@media (min-width: 768px) { .movement, .class, .about, .guy, .dojo, .contact, .footer { padding-block-start: calc(var(--blend) * 0.5); } .contact { padding-block-end: 72px; } }
+/* 2. no flat black slab under the hero photo: the first transition starts under the photo's own fade */
+.hero { z-index: 1; padding-block-end: 20px; }
+.movement { margin-block-start: -60px; }
+@media (min-width: 1024px) { .hero { padding-block-end: 48px; } .movement { margin-block-start: -120px; } }
+/* 3. brush mark in the empty upper zone of each band, away from the text; stronger on phone */
+.movement::after, .class::after, .about::after, .guy::after, .contact::after { inset-block-start: calc(var(--blend) * 0.08); translate: none; block-size: min(62%, 620px); }
+.movement::after { inset-inline-end: -4%; }
+.contact::after { inset-inline-end: -4%; block-size: min(90%, 420px); }
+@media (max-width: 767px) {
+  .movement::after, .class::after, .about::after, .guy::after, .contact::after { block-size: min(46%, 420px); --mark-o: 0.17; }
+  .class::after, .guy::after { --mark-o: 0.13; }
+}
+/* 4. step text on desktop: larger, lighter, shorter lines */
+@media (min-width: 1024px) { .stage__text { font-size: 1.0938rem; font-weight: 400; line-height: 1.8; max-inline-size: 60ch; } }
+/* 5. shelf photo on paper: half the feather, so no blue haze */
+.movement .f-wall { --ft: 2%; --fr: 5%; --fb: 4%; --fl: 5%; }
+/* 6. footer signed with the wordmark; the room under it for the floating button is chestnut, not black */
+.footer__mark { font-family: var(--sans); font-weight: 300; font-size: 22px; letter-spacing: 0.32em; color: var(--ochre); margin: 0; padding-inline-start: 0.32em; }
+.footer__mark + .footer__statement { margin-block-start: 20px; }
+html { background: var(--kuri); }
+/* 7. phone header: lower rows; the small emblem hides while the hero is on screen */
+@media (max-width: 767px) {
+  :root { --hh: 52px; --nav-h: 40px; }
+  .logo-mark { transition: opacity 200ms linear; }
+  html[data-hero] .logo-mark { opacity: 0; }
+}
+/* 8. the Olympic credential: byline one step larger, the two words in gold */
+.hero__byline { font-size: 1.1875rem; font-weight: 500; }
+@media (min-width: 768px) { .hero__byline { font-size: 1.375rem; } }
+.hero__gold { color: var(--ochre); font-weight: 700; }
+/* 9. contact as the closing moment: WhatsApp first and largest, Instagram secondary, email small, no empty tail */
+.contact .cta { min-block-size: 64px; font-size: 1.125rem; }
+.contact .links { margin-block-start: 16px; }
+.contact .textlink { font-size: 0.9375rem; }
+.hero__act .cta { margin-block-end: 0; }

@@ -39,23 +39,6 @@
       function fade() { var more = Math.abs(row.scrollLeft) + row.clientWidth < row.scrollWidth - 2; if (more) nav.setAttribute('data-fade', ''); else nav.removeAttribute('data-fade'); }
       row.addEventListener('scroll', fade, { passive: true }); window.addEventListener('resize', fade); window.addEventListener('load', fade); if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(fade); fade();
     })();
-    /* phone clip strip: four marks follow the scroll position (the card nearest the start edge is lit); the edge fade is dropped once the strip is at its end */
-    (function () {
-      var strip = doc.querySelector('.strip'), marks = doc.querySelectorAll('.strip__marks i');
-      if (!strip || !marks.length) return;
-      var cards = strip.querySelectorAll('.stage'), pending = false;
-      function upd() {
-        pending = false;
-        var rtl = getComputedStyle(root).direction === 'rtl', sr = strip.getBoundingClientRect(), best = 0, bd = 1e9;
-        for (var i = 0; i < cards.length; i++) { var r = cards[i].getBoundingClientRect(), d = Math.abs(rtl ? sr.right - r.right : r.left - sr.left); if (d < bd) { bd = d; best = i; } }
-        for (var j = 0; j < marks.length; j++) { if (j === best) marks[j].setAttribute('data-on', ''); else marks[j].removeAttribute('data-on'); }
-        /* phone: the strip is only as tall as the card in view, so a short card leaves no dead black under it */
-        if (window.innerWidth < 768) strip.style.blockSize = cards[best].offsetHeight + 'px'; else strip.style.blockSize = '';
-        if (Math.abs(strip.scrollLeft) + strip.clientWidth >= strip.scrollWidth - 2) strip.setAttribute('data-end', ''); else strip.removeAttribute('data-end');
-      }
-      strip.addEventListener('scroll', function () { if (!pending) { pending = true; window.requestAnimationFrame(upd); } }, { passive: true });
-      window.addEventListener('resize', upd); window.addEventListener('load', upd); if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(upd); upd();
-    })();
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var vh = window.innerHeight || 800;
 

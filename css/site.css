@@ -372,3 +372,25 @@ html:not(.js) .media video { display: none; }
   .hero__bg::after { background: linear-gradient(to left, rgb(16 14 10 / 0.9) 0%, rgb(16 14 10 / 0.78) 38%, rgb(16 14 10 / 0.25) 75%, rgb(16 14 10 / 0.1) 100%); }
   :root:lang(en) .hero__bg::after { background: linear-gradient(to right, rgb(16 14 10 / 0.9) 0%, rgb(16 14 10 / 0.78) 38%, rgb(16 14 10 / 0.25) 75%, rgb(16 14 10 / 0.1) 100%); }
 }
+
+/* v7 (user's requests): soft tonal transitions between section grounds, and the calligraphy brush mark as a faint background */
+:root { --blend: 96px; }
+@media (min-width: 1024px) { :root { --blend: 160px; } }
+.movement, .class, .about, .guy, .dojo, .contact, .footer { position: relative; isolation: isolate; overflow: hidden; }
+.movement, .class, .about, .guy, .dojo, .contact { padding-block-start: calc(var(--sec) + var(--blend) * 0.75); }
+.footer { padding-block-start: calc(64px + var(--blend) * 0.75); }
+.movement::before, .class::before, .about::before, .guy::before, .dojo::before, .contact::before, .footer::before { content: ""; position: absolute; inset-inline: 0; inset-block-start: 0; block-size: var(--blend); z-index: -1; pointer-events: none; background: linear-gradient(in oklab to bottom, var(--from) 0%, color-mix(in oklab, var(--from) 55%, var(--to)) 38%, color-mix(in oklab, var(--from) 18%, var(--to)) 70%, var(--to) 100%); }
+.movement { --from: var(--sumi); --to: var(--washi); }
+.class { --from: var(--washi); --to: var(--sumi); }
+.about { --from: var(--sumi); --to: var(--washi); }
+.guy { --from: var(--washi); --to: var(--kuri); }
+.dojo { --from: var(--kuri); --to: var(--sumi); }
+.contact { --from: var(--sumi); --to: var(--washi); }
+.footer { --from: var(--washi); --to: var(--kuri); }
+.hero__bg::before { content: ""; position: absolute; inset-inline: 0; inset-block-end: 0; block-size: 28%; z-index: 1; background: linear-gradient(to top, var(--sumi) 0%, rgb(16 14 10 / 0) 100%); }
+/* brush mark: one large, faint stroke behind the content of each band, alternating sides */
+.movement::after, .class::after, .about::after, .guy::after, .contact::after { content: ""; position: absolute; z-index: -1; pointer-events: none; inset-block-start: 50%; translate: 0 -46%; block-size: min(86%, 760px); aspect-ratio: 1240 / 1600; background: var(--mark, var(--washi-ink)); opacity: var(--mark-o, 0.06); -webkit-mask: url("/gura-dojo-preview/images/brush-mark-1600.png") center / contain no-repeat; mask: url("/gura-dojo-preview/images/brush-mark-1600.png") center / contain no-repeat; }
+.movement::after, .about::after, .contact::after { inset-inline-end: -6%; }
+.class::after, .guy::after { inset-inline-start: -6%; --mark: var(--washi); --mark-o: 0.045; }
+.about::after { inset-inline-end: auto; inset-inline-start: -6%; }
+@media (max-width: 767px) { .movement::after, .class::after, .about::after, .guy::after, .contact::after { block-size: min(60%, 420px); } }
